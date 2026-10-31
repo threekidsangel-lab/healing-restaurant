@@ -44,7 +44,7 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
 .lang button.on{background:var(--lamp);color:var(--ink)}
 .bump{animation:bump .35s}@keyframes bump{40%{transform:scale(1.25) rotate(-8deg)}}
 
-#prompt{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:12;background:rgba(255,246,232,.96);padding:11px 20px;border-radius:16px;font-size:17px;box-shadow:0 4px 0 #c9a37c,0 8px 20px rgba(0,0,0,.25);animation:pin .2s}
+#prompt{position:fixed;left:50%;bottom:150px;transform:translateX(-50%);z-index:12;background:rgba(255,246,232,.96);padding:11px 20px;border-radius:16px;font-size:17px;box-shadow:0 4px 0 #c9a37c,0 8px 20px rgba(0,0,0,.25);animation:pin .2s}
 #prompt kbd{background:var(--wood3);color:#fff;border-radius:6px;padding:1px 7px;margin-right:6px;font-family:'Jua'}
 @keyframes pin{from{opacity:0;transform:translate(-50%,8px)}}
 
@@ -113,12 +113,52 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
 /* modals */
 .modal{position:fixed;inset:0;z-index:30;background:rgba(40,22,14,.55);display:grid;place-items:center;padding:10px;backdrop-filter:blur(2px)}
 .sheet{background:var(--cream);border-radius:22px;width:min(1000px,100%);max-height:94vh;overflow:auto;padding:16px;box-shadow:0 8px 0 #d9b994,0 20px 50px rgba(0,0,0,.4);position:relative}
-.sheet .x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:12px;background:#f2dfc4;font-size:18px;z-index:3}
+.sheet .x{position:sticky;float:right;top:0;margin:-4px -4px 0 6px;width:38px;height:38px;border-radius:12px;background:#f2dfc4;font-size:18px;z-index:3}
 .chefline{display:flex;gap:10px;align-items:center;margin:0 50px 18px 0}
 .chefline .f{font-size:40px}
 .chefline .bub{background:#fff;border-radius:14px;padding:10px 14px;flex:1;box-shadow:0 2px 0 #ead2b2}
 .shoplay{display:grid;grid-template-columns:1fr 250px;gap:14px;align-items:start}
-@media(max-width:820px){.shoplay{grid-template-columns:1fr}#cook{width:auto;left:12px;top:auto;max-height:50vh}#facecam{width:140px;height:140px;top:130px}}
+@media(max-width:820px){
+ .brand h1{font-size:14px}.brand small{display:none}.brand{padding:6px 10px}
+ .hud-tl{gap:5px}.hud-tl .pill{font-size:11px;padding:4px 9px}.happy .bar{width:56px}
+ .hud-tr{gap:5px}.ibtn{width:38px;height:38px;font-size:17px;border-radius:12px}.lang{padding:3px}.lang button{padding:6px 7px;font-size:11px}
+ #facecam{width:104px;height:104px;top:112px;border-radius:16px}#facecam span{font-size:10px;padding:2px 8px}
+ #cook{left:8px;right:8px;width:auto;top:auto;bottom:8px;max-height:44vh;padding:10px 12px;border-radius:18px}
+ #cook.min{max-height:52px;overflow:hidden}
+ .minbtn{display:block!important}
+ .modal{padding:0}.sheet{max-height:100vh;height:100%;border-radius:0;padding:12px}
+ .chefline{margin-bottom:10px}.chefline .f{font-size:30px}.chefline .bub{padding:7px 10px;font-size:13px}
+ .shoplay{grid-template-columns:1fr;gap:10px}
+ .buffet{gap:22px 8px;padding:20px 6px 8px}.tray{height:150px}.tray .items{inset:20px 10px 12px}.pile{min-height:42px}.pile .cp{font-size:22px}.pile .tp{font-size:9.5px}
+ .potbox{position:sticky;bottom:-12px;z-index:5;padding:8px 10px;box-shadow:0 -6px 16px rgba(0,0,0,.18)}
+ .potbox .mypot,.potbox .tip,.potbox [data-close="shop"]{display:none}
+ .potbox .blist{max-height:64px;font-size:12px}.potbox h3{font-size:14px}
+ .zonebtns{display:flex;gap:6px}.zonebtns .donebtn{font-size:14px;padding:10px 6px}
+ .drinklay{gap:10px}.machine{transform:scale(.82);transform-origin:top center;margin-bottom:-78px}
+}
+@media(max-width:520px){.brand{display:none}.hud-tl{top:60px}#facecam{top:150px}}
+.minbtn{display:none;position:absolute;right:10px;top:8px;width:34px;height:30px;border-radius:10px;background:#f2dfc4;font-size:14px}
+#cook{position:fixed}
+#chatToggle{display:none}
+body.touch #chatToggle{display:block}
+body.touch .chat{left:10px;right:auto;width:min(300px,62vw);bottom:150px;pointer-events:none}
+body.touch .chat .emotes,body.touch .chat .quick,body.touch #chatInput{display:none}
+body.touch #chatlog{max-height:52px}body.touch #chatlog div{font-size:11px;padding:3px 7px}
+body.touch.chatopen .chat{left:8px;right:8px;width:auto;bottom:8px;pointer-events:auto;background:rgba(40,25,18,.55);padding:8px;border-radius:16px;z-index:25}
+body.touch.chatopen .chat .emotes,body.touch.chatopen .chat .quick{display:flex}body.touch.chatopen #chatInput{display:block}
+body.touch.chatopen #chatlog{max-height:120px}
+body.touch.chatopen #joy,body.touch.chatopen #jump,body.cooking #joy,body.cooking #jump{display:none!important}
+body.cooking.touch .chat{bottom:calc(44vh + 16px)}
+body.cooking.touch.cookmin .chat{bottom:70px}
+#ssamFx{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:45;pointer-events:none;width:200px;height:160px}
+#ssamFx .leaf{position:absolute;left:50%;top:50%;font-size:110px;transform:translate(-50%,-50%) scale(0);animation:leafIn 1.4s forwards}
+#ssamFx .meat{position:absolute;left:50%;top:-30px;transform:translateX(-50%);animation:meatIn 1.4s forwards}
+#ssamFx .yum{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);font-family:'Jua';font-size:26px;color:#fff;text-shadow:0 2px 0 #3a7a2a,0 0 12px rgba(0,0,0,.4);white-space:nowrap;opacity:0;animation:yumIn 1.4s forwards}
+@keyframes leafIn{0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg)}25%{transform:translate(-50%,-50%) scale(1.1) rotate(0)}55%{transform:translate(-50%,-50%) scale(1)}75%{transform:translate(-50%,-50%) scale(.55,1) rotate(8deg)}100%{transform:translate(-50%,-130%) scale(.3);opacity:0}}
+@keyframes meatIn{0%{top:-40px;opacity:0}20%{opacity:1}45%{top:52px}75%{top:52px;transform:translateX(-50%) scale(.6)}100%{top:10px;opacity:0;transform:translateX(-50%) scale(.2)}}
+@keyframes yumIn{0%,55%{opacity:0;transform:translateX(-50%) scale(.5)}70%{opacity:1;transform:translateX(-50%) scale(1.15)}100%{opacity:0;transform:translateX(-50%) translateY(-20px)}}
+.ssamrow{display:flex;gap:6px;flex-wrap:wrap}.ssamrow button{flex:1;background:#eaf6df;border:2px solid #b8dca0;border-radius:12px;padding:7px 4px;font-size:13px}
+.ssamrow button.on{background:#5aa63e;color:#fff;border-color:#3e7a2a}
 .buffet{background:linear-gradient(#b67a50,#94603d);border-radius:22px;padding:24px 12px 12px;display:flex;flex-wrap:wrap;gap:26px 12px;justify-content:center;box-shadow:inset 0 6px 0 rgba(255,255,255,.18),0 8px 0 #6e4329}
 .tray{position:relative;width:min(298px,100%);height:190px;border-radius:44% 44% 40% 40%/30% 30% 26% 26%;background:radial-gradient(ellipse at 50% 40%,#e9c58f,#c99558 70%,#a8733e);box-shadow:inset 0 -8px 0 rgba(0,0,0,.18),inset 0 5px 0 rgba(255,255,255,.35),0 6px 10px rgba(0,0,0,.25)}
 .tray.cream{background:radial-gradient(ellipse at 45% 35%,#fbf3e4,#e8d6b8 65%,#c9ad84)}
@@ -180,9 +220,9 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
 .toast{background:rgba(58,33,20,.93);color:var(--cream);padding:10px 16px;border-radius:14px;font-size:14px;box-shadow:0 6px 16px rgba(0,0,0,.25);animation:pin2 .3s,tout .4s 2.8s forwards;text-align:center}
 @keyframes pin2{from{opacity:0;transform:translateY(-8px)}}
 @keyframes tout{to{opacity:0;transform:translateY(-6px)}}
-#joy{position:fixed;left:24px;bottom:150px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);z-index:9;touch-action:none}
+#joy{position:fixed;left:22px;bottom:22px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);z-index:9;touch-action:none}
 #joy i{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(255,246,232,.85)}
-#jump{position:fixed;right:24px;bottom:160px;width:70px;height:70px;border-radius:50%;background:rgba(255,246,232,.85);font-size:15px;z-index:9;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+#jump{position:fixed;right:22px;bottom:34px;width:70px;height:70px;border-radius:50%;background:rgba(255,246,232,.85);font-size:15px;z-index:9;box-shadow:0 4px 0 rgba(0,0,0,.25)}
 #loading{position:fixed;inset:0;display:grid;place-items:center;color:#fff;font-family:'Jua';font-size:20px;z-index:60;background:#2b2440}
 </style>
 </head>
@@ -199,6 +239,7 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
   <div class="lang"><button data-lang="ko" class="on">한국어</button><button data-lang="en">English</button></div>
   <button class="ibtn" id="basketBtn">🍲<b id="basketCount">0</b></button>
   <button class="ibtn" id="soundBtn">🔊</button>
+  <button class="ibtn" id="chatToggle">💬</button>
   <button class="ibtn" id="helpBtn">❔</button>
 </div>
 
@@ -213,6 +254,7 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
 </div>
 
 <div id="cook" class="hidden"></div>
+<div id="ssamFx" class="hidden"></div>
 <div id="joy" class="hidden"><i></i></div>
 <button id="jump" class="hidden">Jump</button>
 
@@ -224,11 +266,11 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
       <div class="sets"><button data-set="grill" data-i="setGrill"></button><button data-set="shabu" data-i="setShabu"></button></div>
       <div class="buffet" id="trays"></div>
     </div>
-    <div class="potbox">
+    <div class="potbox" id="potbox">
       <h3 style="margin:0" data-i="myPot"></h3>
       <div class="mypot" id="mypot"></div>
       <ul class="blist" id="blist"></ul>
-      <button class="donebtn" data-close="shop" data-i="doneShop"></button><div style="margin-top:10px;text-align:center" class="jua" data-i="whereGo"></div><button class="donebtn" style="margin-top:6px;background:linear-gradient(#ff8a5a,#e4502f);box-shadow:0 4px 0 #a8452a" data-act="zone" data-zone="grill" data-i="toGrill"></button><button class="donebtn" style="margin-top:6px;background:linear-gradient(#6cc28c,#3f8a5f);box-shadow:0 4px 0 #2d6644" data-act="zone" data-zone="shabu" data-i="toShabu"></button>
+      <button class="donebtn" data-close="shop" data-i="doneShop"></button><div style="margin-top:10px;text-align:center" class="jua" data-i="whereGo"></div><div class="zonebtns"><button class="donebtn" style="margin-top:6px;background:linear-gradient(#ff8a5a,#e4502f);box-shadow:0 4px 0 #a8452a" data-act="zone" data-zone="grill" data-i="toGrill"></button><button class="donebtn" style="margin-top:6px;background:linear-gradient(#6cc28c,#3f8a5f);box-shadow:0 4px 0 #2d6644" data-act="zone" data-zone="shabu" data-i="toShabu"></button></div>
       <div class="tip" data-i="shopTip"></div>
     </div>
   </div>
@@ -239,7 +281,7 @@ button{cursor:pointer;border:none;color:inherit;font-size:inherit;background:non
   <h2 style="margin:0 0 14px" data-i="drinkTitle"></h2>
   <div class="drinklay">
     <div class="machine"><div class="top">DRINK BAR</div><div class="dbtns" id="dbtns"></div><div class="nozzles"><i></i><i></i><i></i><i></i><i></i></div><div class="slot"></div><div class="drip"></div><div class="stream" id="stream"></div><div id="fillcup" style="position:absolute"></div></div>
-    <div class="cupsbox"><h3 style="margin:0 0 10px" data-i="myCups"></h3><div id="mycups"></div><div class="tip" data-i="drinkTip"></div><button class="donebtn" data-close="drink" data-i="doneDrink"></button><div style="margin-top:10px;text-align:center" class="jua" data-i="whereGo"></div><button class="donebtn" style="margin-top:6px;background:linear-gradient(#ff8a5a,#e4502f);box-shadow:0 4px 0 #a8452a" data-act="zone" data-zone="grill" data-i="toGrill"></button><button class="donebtn" style="margin-top:6px;background:linear-gradient(#6cc28c,#3f8a5f);box-shadow:0 4px 0 #2d6644" data-act="zone" data-zone="shabu" data-i="toShabu"></button></div>
+    <div class="cupsbox"><h3 style="margin:0 0 10px" data-i="myCups"></h3><div id="mycups"></div><div class="tip" data-i="drinkTip"></div><button class="donebtn" data-close="drink" data-i="doneDrink"></button><div style="margin-top:10px;text-align:center" class="jua" data-i="whereGo"></div><div class="zonebtns"><button class="donebtn" style="margin-top:6px;background:linear-gradient(#ff8a5a,#e4502f);box-shadow:0 4px 0 #a8452a" data-act="zone" data-zone="grill" data-i="toGrill"></button><button class="donebtn" style="margin-top:6px;background:linear-gradient(#6cc28c,#3f8a5f);box-shadow:0 4px 0 #2d6644" data-act="zone" data-zone="shabu" data-i="toShabu"></button></div></div>
   </div>
 </div></div>
 
@@ -313,7 +355,7 @@ ko:{happy:'행복',solo:'⚪ 혼자 플레이 중',branch:'{n}호점',alone:'�
  sip:{coffee:'후~ 따뜻해… ☕',water:'꿀꺽, 개운하다 💧',juice:'상큼해! 🍊',cola:'캬~ 탄산 최고! 🥤',sprite:'청량하다~ ✨'},
  cupEmpty:'다 마셨어요! 리필은 드링크 바에서 🥤',dryOff:'',
  cooking:'익는 중',done:'다 익었어요!',
- trayFinish:'🍜 마무리 메뉴',goTable:'🍽️ 식탁으로 이동하기',whereGo:'다 골랐으면 어디로 갈까요?',toGrill:'🔥 고기 구이 존으로',toShabu:'🍲 샤브샤브 존으로',
+ trayFinish:'🍜 마무리 메뉴',trayWrap:'🥬 쌈 채소',ssamTitle:'🥬 쌈 싸 먹기',ssamOn:'쌈 모드: {l} — 익은 고기를 누르면 쌈 싸서 먹어요',ssamOff:'끄기',ssamNone:'카운터의 🥬 쌈 채소 쟁반에서 상추·깻잎을 담아 오면 쌈 싸 먹을 수 있어요',ssamOut:'{l}이(가) 다 떨어졌어요',ssamYum:'쌈 최고! 🥬',ssamMsg:['{l}에 {m} 올리고 {s}한 쌈 가득! 🥬😋','아삭아삭 {l}쌈! 이 맛에 고기 먹지 🤤','{l} 향이 확~ 입안 가득 행복 💚'],goTable:'🍽️ 식탁으로 이동하기',whereGo:'다 골랐으면 어디로 갈까요?',toGrill:'🔥 고기 구이 존으로',toShabu:'🍲 샤브샤브 존으로',
  tableFull:'이 테이블은 자리가 꽉 찼어요',joinedTable:'🤝 {n}님 테이블에 합석했어요! 같이 먹어요',hello:'같이 먹어요~ 🙌',joining:'합석하러 가는 중… 🤝',pJoin:'🤝 {n}님과 함께 먹기',
  withHost:'{n}님 테이블에 합석 중',compTip:'불판/냄비 위 음식을 <b>클릭하면 같이 먹어요</b>. 내 냄비의 재료도 함께 올릴 수 있어요. 불 조절은 테이블 주인이 해요.',
  cantAdd:'지금은 올릴 수 없어요 (자리가 없거나 육수가 필요해요)',notReadyShared:'아직 덜 익었어요 ⏳',nowHost:'🍽️ 이제 내가 이 테이블의 주인이에요!',
@@ -366,7 +408,7 @@ en:{happy:'Joy',solo:'⚪ Playing solo',branch:'Branch #{n}',alone:'🟢 Connect
  sip:{coffee:'Ahh, so warm… ☕',water:'Gulp, refreshing 💧',juice:'So fresh! 🍊',cola:'Fizz! The best 🥤',sprite:'So crisp~ ✨'},
  cupEmpty:'All gone! Refill at the Drink Bar 🥤',
  cooking:'Cooking',done:'Ready!',
- trayFinish:'🍜 Finishing Menu',goTable:'🍽️ Go to a table',whereGo:'All set? Where would you like to eat?',toGrill:'🔥 To the Grill Zone',toShabu:'🍲 To the Shabu Zone',
+ trayFinish:'🍜 Finishing Menu',trayWrap:'🥬 Leafy Wraps',ssamTitle:'🥬 Make a ssam wrap',ssamOn:'Wrap mode: {l} — tap cooked meat to wrap and eat',ssamOff:'Off',ssamNone:'Grab lettuce or perilla from the 🥬 Leafy Wraps tray at the counter to make ssam wraps',ssamOut:'Out of {l}',ssamYum:'Ssam is the best! 🥬',ssamMsg:['{m} wrapped in {l}, {s}one big bite! 🥬😋','Crunchy {l} wrap! This is why we grill 🤤','The fresh {l} fills your mouth — pure joy 💚'],goTable:'🍽️ Go to a table',whereGo:'All set? Where would you like to eat?',toGrill:'🔥 To the Grill Zone',toShabu:'🍲 To the Shabu Zone',
  tableFull:'This table is full',joinedTable:'🤝 You joined {n}\'s table! Let\'s eat together',hello:'Let\'s eat together~ 🙌',joining:'Joining a table… 🤝',pJoin:'🤝 Eat with {n}',
  withHost:'Sharing {n}\'s table',compTip:'<b>Click food on the grill/pot to eat together</b>. You can add food from your pot too. The table owner controls the heat.',
  cantAdd:'Can\'t add that now (no space or broth needed)',notReadyShared:'Not cooked yet ⏳',nowHost:'🍽️ You are now the owner of this table!',
@@ -410,6 +452,8 @@ const ITEMS=[
  {id:'sesame',cat:'sauce',ko:'참깨소스',en:'Sesame Sauce',zones:['shabu'],color:'#e9d3a6'},
  {id:'chili',cat:'sauce',ko:'칠리소스',en:'Chili Sauce',zones:['shabu','grill'],color:'#d8452e'},
  {id:'wasabi',cat:'sauce',ko:'와사비 간장',en:'Wasabi Soy',zones:['shabu','grill'],color:'#3e2a1e'},
+ {id:'lettuce',cat:'wrap',ko:'상추',en:'Lettuce',zones:['grill'],emoji:'🥬'},
+ {id:'perilla',cat:'wrap',ko:'깻잎',en:'Perilla Leaf',zones:['grill'],emoji:'🍃'},
 ];
 const IDX=Object.fromEntries(ITEMS.map((it,i)=>[it.id,i]));
 const BY=Object.fromEntries(ITEMS.map(i=>[i.id,i]));
@@ -422,7 +466,7 @@ const DRINKS=[
  {id:'sprite',ko:'스프라이트',en:'Sprite',ic:'🍋',color:'#d6f5c4',fizz:true},
 ];
 const DIDX=Object.fromEntries(DRINKS.map((d,i)=>[d.id,i]));
-const SETS={grill:{deung:2,samgyeop:2,galbi:1,mushroom:1,garlic:1,onion:1,corn:1,gireum:1,ssamjang:1},shabu:{shabubeef:3,chadol:1,cabbage:1,mushroom:1,broccoli:1,pumpkin:1,scallion:1,sagol:1,sesame:1,chili:1,kalguksu:1,juk:1}};
+const SETS={grill:{lettuce:2,perilla:2,deung:2,samgyeop:2,galbi:1,mushroom:1,garlic:1,onion:1,corn:1,gireum:1,ssamjang:1},shabu:{shabubeef:3,chadol:1,cabbage:1,mushroom:1,broccoli:1,pumpkin:1,scallion:1,sagol:1,sesame:1,chili:1,kalguksu:1,juk:1}};
 const COLORS=['#ff8a7a','#ffb84d','#7cc77a','#6aa8e8','#b38ae8','#f08ac0'];
 
 /* =================== HELPERS =================== */
@@ -856,7 +900,7 @@ function npcTick(n,dt){
 
 /* =================== SHOP (trays → pot) =================== */
 let myAv=null;
-const TRAYS=[{key:'trayMeat',cat:'meat',cols:3},{key:'trayVeg',cat:'veg',cols:5},{key:'trayBroth',cat:'broth',cols:4,cream:true},{key:'traySauce',cat:'sauce',cols:5,cream:true},{key:'trayFinish',cat:'finish',cols:2}];
+const TRAYS=[{key:'trayMeat',cat:'meat',cols:3},{key:'trayVeg',cat:'veg',cols:5},{key:'trayWrap',cat:'wrap',cols:2},{key:'trayBroth',cat:'broth',cols:4,cream:true},{key:'traySauce',cat:'sauce',cols:5,cream:true},{key:'trayFinish',cat:'finish',cols:2}];
 function pileInner(it){
  let h='';
  if(it.cat==='meat'&&!it.emoji)[[-8,-6,-12],[6,2,8],[-2,8,-3]].forEach(([dx,dy,r])=>h+=`<span class="cp" style="transform:translate(${dx}px,${dy}px) rotate(${r}deg)">${slabHTML(it)}</span>`);
@@ -873,7 +917,7 @@ function addPot(id,n=1){pot[id]=(pot[id]||0)+n;for(let i=0;i<n;i++)potOrder.push
 function takePot(id){if(!pot[id])return false;pot[id]--;if(!pot[id])delete pot[id];const i=potOrder.lastIndexOf(id);if(i>=0)potOrder.splice(i,1);renderPot();bumpBasket();return true}
 function flyToPot(id,src){
  if(potCount()>=30){toast(t('potFull'));return}
- const it=BY[id],target=$('#mypot'),r1=src.getBoundingClientRect(),r2=target.getBoundingClientRect();
+ const it=BY[id],target=$('#mypot').offsetParent?$('#mypot'):$('#potbox'),r1=src.getBoundingClientRect(),r2=target.getBoundingClientRect();
  const f=document.createElement('div');f.className='flyer';f.innerHTML=it.emoji?`<span style="font-size:30px">${it.emoji}</span>`:picHTML(it);
  f.style.left=r1.left+r1.width/2-30+'px';f.style.top=r1.top+r1.height/2-20+'px';f.style.width='60px';f.style.height='40px';document.body.appendChild(f);
  const dx=r2.left+r2.width/2-(r1.left+r1.width/2),dy=r2.top+r2.height*.35-(r1.top+r1.height/2);
@@ -929,6 +973,7 @@ function iAte(msg){ // expression + sound + sync
  setBubble(myAv,pickT('yum'),2200);if(msg)toast(msg);
 }
 function useItem(id){
+ if(BY[id]&&BY[id].cat==='wrap'){toggleSsam(id);return}
  const tb=curTable();if(!tb)return;const it=BY[id];
  if(!it.zones.includes(tb.type)){toast(t(tb.type==='grill'?'notForGrill':'notForShabu'));return}
  if(!isHostHere()){if(!takePot(id))return;sendReq('a',IDX[id],{id});plop();return}
@@ -949,10 +994,28 @@ function useItem(id){
  }
 }
 function flip(p){p.bottom=1-p.bottom;p.fl++;if(grill.heat>0)for(let i=0;i<6;i++)setTimeout(()=>crackle(.6),Math.random()*250)}
+let ssamMode=null;
+function toggleSsam(id){ssamMode=ssamMode===id?null:id;if(ssamMode&&!pot[ssamMode])ssamMode=null;if(ssamMode)toast(t('ssamOn',{l:nm(BY[ssamMode])}));pop();renderCook()}
+function ssamHTML(tb){if(tb.type!=='grill')return'';const ws=['lettuce','perilla'].filter(id=>pot[id]);
+ if(!ws.length){if(ssamMode)ssamMode=null;return`<div class="sub">${t('ssamTitle')}</div><div class="tip" style="margin-top:0">${t('ssamNone')}</div>`}
+ if(ssamMode&&!pot[ssamMode])ssamMode=null;
+ return`<div class="sub">${t('ssamTitle')}</div><div class="ssamrow">${ws.map(id=>`<button data-use="${id}" class="${ssamMode===id?'on':''}">${BY[id].emoji} ${nm(BY[id])} ×${pot[id]}</button>`).join('')}${ssamMode?`<button data-act="ssamoff">${t('ssamOff')}</button>`:''}</div>${ssamMode?`<div class="tip" style="margin-top:6px;background:#eaf6df">${t('ssamOn',{l:nm(BY[ssamMode])})}</div>`:''}`}
+function crunch(){for(let i=0;i<4;i++){noiseHit(2500+Math.random()*3000,'bandpass',.8,.28,.05,i*.09);osc('sine',180,90,.12,.06,i*.09)}}
+function trySsam(it){ // returns true when the bite was wrapped in a leaf
+ if(!it||it.cat!=='meat'||!ssamMode||!pot[ssamMode])return false;
+ const leaf=BY[ssamMode];takePot(ssamMode);
+ const fx=$('#ssamFx');fx.innerHTML=`<div class="leaf">${leaf.emoji}</div><div class="meat">${it.emoji?`<span style="font-size:54px">${it.emoji}</span>`:slabHTML(it)}</div><div class="yum">${t('ssamYum')}</div>`;fx.classList.remove('hidden');clearTimeout(trySsam.t);trySsam.t=setTimeout(()=>fx.classList.add('hidden'),1450);
+ crunch();setTimeout(crunch,500);addHappy(5);
+ const sn=pot.ssamjang?t('sauceDip',{s:nm(BY.ssamjang)}):sauceNote('grill');
+ setTimeout(()=>{toast(pickT('ssamMsg',{l:nm(leaf),m:nm(it),s:sn}));me.e='🥬';me.eT=Date.now();showEmote(myAv,'🥬');sendPresence(true)},300);
+ if(!pot[ssamMode]){toast(t('ssamOut',{l:nm(leaf)}));ssamMode=null}
+ renderCook();return true;
+}
 function eatPiece(p){
  const it=ITEMS[p.i],st=stateOf(p),sn=sauceNote('grill');
  const msg=st==='burnt'?pickT('eatBurnt'):st==='crispy'?pickT('eatCrispy',{s:sn}):pickT('eatPerfect',{s:sn});
- addHappy(st==='perfect'?9:st==='crispy'?7:2);grill.pieces=grill.pieces.filter(x=>x!==p);iAte(`${nm(it)}: ${msg}`);
+ addHappy(st==='perfect'?9:st==='crispy'?7:2);grill.pieces=grill.pieces.filter(x=>x!==p);
+ if(trySsam(it))iAte(null);else iAte(`${nm(it)}: ${msg}`);
 }
 function pourBroth(id){
  if(spot.broth>=0&&spot.broth!==IDX[id]&&spot.level>15){toast(t('sameBroth'));return}
@@ -993,31 +1056,32 @@ function myCompact(){
  if(tb.type==='grill')return{h:grill.heat,cu,it:grill.pieces.map(p=>{const st=stateOf(p);return[p.uid,p.i,p.slot,Math.round(p.sides[1-p.bottom]),p.fl,st!=='raw'?1:0,p.sides[p.bottom]>200?1:0]})};
  return{b:spot.broth,l:Math.round(spot.level),t:Math.round(spot.temp),pw:spot.power?1:0,cu,j:spot.juk?[Math.round(spot.juk.p),+spot.juk.ang.toFixed(2),spot.juk.serv,spot.juk.stir]:null,it:spot.foods.map(f=>[f.uid,f.i,Math.round(f.x*100),Math.round(f.z*100),Math.round(f.p)])};
 }
+let cookMin=false;
 function renderCook(){
  const tb=curTable(),el=$('#cook');
  if(mode==='cook'&&tb&&!isHostHere()){renderCompanion(tb,el);return}
  if(mode!=='cook'||!tb){el.classList.add('hidden');$('#facecam').classList.add('hidden');return}
  el.classList.remove('hidden');$('#facecam').classList.remove('hidden');
- const ids=Object.keys(pot).filter(id=>BY[id].cat!=='sauce').sort((a,b)=>IDX[a]-IDX[b]);
+ const ids=Object.keys(pot).filter(id=>BY[id].cat!=='sauce'&&BY[id].cat!=='wrap').sort((a,b)=>IDX[a]-IDX[b]);
  const tiles=ids.length?ids.map(id=>{const it=BY[id],ok=it.zones.includes(tb.type);return`<button class="tile ${ok?'':'off'}" data-use="${id}"><b>×${pot[id]}</b><div class="pic">${picHTML(it)}</div><div class="nm">${nm(it)}</div></button>`}).join(''):`<div class="empty">${t('needIng')}</div>`;
  let h='';
  if(tb.type==='grill')h=`<h3>${t('grillTitle')} ${tb.id}${tb.six?' · 👨‍👩‍👧‍👦 6':''}</h3><div class="ctl"><div class="seg">${t('heat').map((n,i)=>`<button data-heat="${i}" class="${grill.heat===i?'on':''}">${n}</button>`).join('')}</div><button class="cbtn" data-act="flipall">${t('flipAll')}</button><button class="cbtn go" data-act="eatall">${t('eatAll')}</button></div>`;
  else h=`<h3>${t('shabuTitle')} ${tb.id}${tb.six?' · 👨‍👩‍👧‍👦 6':''}</h3><div class="ctl"><button class="cbtn ${spot.power?'alt':'go'}" data-act="power">${spot.power?t('powerOff'):t('power')}</button><button class="cbtn" data-act="scoopall">${t('scoopAll')}</button><div class="meter">${t('temp')} <span id="tTxt"></span><div class="bar"><i id="tBar" style="background:linear-gradient(90deg,#ffc36a,#e4502f)"></i></div></div><div class="meter">${t('level')}<div class="bar"><i id="lBar" style="background:#e8b878"></i></div></div></div>${spot.juk?`<div class="tip" style="margin:0 0 8px;background:#fff3c8"><b id="jukTxt">${jukReady()?t('jukReady')+' · '+t('jukLeft',{n:spot.juk.serv}):t('jukCook',{n:Math.min(3,spot.juk.stir)})}</b><div class="ctl" style="margin:6px 0 0"><button class="cbtn" data-act="stir">${t('stir')}</button><button class="cbtn go" data-act="eatjuk">${t('eatJuk')}</button></div></div>`:''}`;
- h+=`<div class="sub">${t('fromPot')}</div><div class="tiles">${tiles}</div>`;
+ h+=ssamHTML(tb)+`<div class="sub">${t('fromPot')}</div><div class="tiles">${tiles}</div>`;
  h+=`<div class="sub">${t('myCups')}</div>${cups.length?`<div class="tcups">${cups.map((c,i)=>`<div class="cupw" data-sip="${i}">${cupSVG(DRINKS[c.d],c.lvl,40)}<span class="ct">${DRINKS[c.d][LANG]}</span></div>`).join('')}</div><div class="tip" style="margin-top:0;text-align:center">${t('cupsTip')}</div>`:`<div class="empty">${t('noCup')}</div>`}`;
  h+=`<div class="tip">${t(tb.type==='grill'?'grillTip':'shabuTip')}${tb.type==='shabu'?'<br>'+t('jukTip'):''}</div><div class="ctl" style="margin-top:10px"><button class="cbtn alt" data-act="stand">${t('standUp')}</button><button class="cbtn go" data-act="tocounter">${t('clearGo')}</button></div>`;
- el.innerHTML=h;el.dataset.last='';updatePotMeters();
+ el.innerHTML='<button class="minbtn" data-act="mincook">'+(cookMin?'▲':'▼')+'</button>'+h;el.dataset.last='';el.classList.toggle('min',cookMin);updatePotMeters();
 }
-function tilesHTML(tb){const ids=Object.keys(pot).filter(id=>BY[id].cat!=='sauce').sort((a,b)=>IDX[a]-IDX[b]);return ids.length?ids.map(id=>{const it=BY[id],ok=it.zones.includes(tb.type);return`<button class="tile ${ok?'':'off'}" data-use="${id}"><b>×${pot[id]}</b><div class="pic">${picHTML(it)}</div><div class="nm">${nm(it)}</div></button>`}).join(''):`<div class="empty">${t('needIng')}</div>`}
+function tilesHTML(tb){const ids=Object.keys(pot).filter(id=>BY[id].cat!=='sauce'&&BY[id].cat!=='wrap').sort((a,b)=>IDX[a]-IDX[b]);return ids.length?ids.map(id=>{const it=BY[id],ok=it.zones.includes(tb.type);return`<button class="tile ${ok?'':'off'}" data-use="${id}"><b>×${pot[id]}</b><div class="pic">${picHTML(it)}</div><div class="nm">${nm(it)}</div></button>`}).join(''):`<div class="empty">${t('needIng')}</div>`}
 function renderCompanion(tb,el){
  el.classList.remove('hidden');$('#facecam').classList.remove('hidden');
  const hp=hostPeer(tb),st=hostState(tb);
  let h=`<h3>🤝 ${t('withHost',{n:hp?hp.name:'…'})}</h3><div class="tip" style="margin-top:0">${t('compTip')}</div>`;
  if(st&&Array.isArray(st.j)){const ready=+st.j[0]>=100&&+st.j[3]>=3;h+=`<div class="tip" style="background:#fff3c8"><b>${ready?t('jukReady')+' · '+t('jukLeft',{n:st.j[2]}):t('jukCook',{n:Math.min(3,+st.j[3]||0)})}</b><div class="ctl" style="margin:6px 0 0"><button class="cbtn" data-act="cstir">${t('stir')}</button><button class="cbtn go" data-act="cjuk">${t('eatJuk')}</button></div></div>`}
- h+=`<div class="sub">${t('fromPot')}</div><div class="tiles">${tilesHTML(tb)}</div>`;
+ h+=ssamHTML(tb)+`<div class="sub">${t('fromPot')}</div><div class="tiles">${tilesHTML(tb)}</div>`;
  h+=`<div class="sub">${t('myCups')}</div>${cups.length?`<div class="tcups">${cups.map((c,i)=>`<div class="cupw" data-sip="${i}">${cupSVG(DRINKS[c.d],c.lvl,40)}<span class="ct">${DRINKS[c.d][LANG]}</span></div>`).join('')}</div>`:`<div class="empty">${t('noCup')}</div>`}`;
  h+=`<div class="ctl" style="margin-top:10px"><button class="cbtn alt" data-act="stand">${t('standUp')}</button><button class="cbtn go" data-act="tocounter">${t('clearGo')}</button></div>`;
- if(el.dataset.last!==h){el.innerHTML=h;el.dataset.last=h}
+ h='<button class="minbtn" data-act="mincook">'+(cookMin?'▲':'▼')+'</button>'+h;if(el.dataset.last!==h){el.innerHTML=h;el.dataset.last=h}el.classList.toggle('min',cookMin);
 }
 function updatePotMeters(){const a=$('#tBar');if(!a)return;a.style.width=Math.max(0,(spot.temp-20)/80*100)+'%';$('#lBar').style.width=spot.level+'%';$('#tTxt').textContent=Math.round(spot.temp)+'℃'}
 
@@ -1084,7 +1148,7 @@ function doReq(k,u){
 function handleAck(pd,code){
  const it=ITEMS[pd.i|0];
  if(code===0){if(pd.k==='a'&&pd.id){addPot(pd.id,1);toast(t('cantAdd'))}else if(pd.k==='e'||pd.k==='s'||pd.k==='j')toast(t('notReadyShared'));return}
- if(code>=1&&code<=3){const sn=sauceNote('grill'),msg=code===3?pickT('eatBurnt'):code===2?pickT('eatCrispy',{s:sn}):pickT('eatPerfect',{s:sn});addHappy(code===1?9:code===2?7:2);iAte(`${nm(it)}: ${msg}`)}
+ if(code>=1&&code<=3){const sn=sauceNote('grill'),msg=code===3?pickT('eatBurnt'):code===2?pickT('eatCrispy',{s:sn}):pickT('eatPerfect',{s:sn});addHappy(code===1?9:code===2?7:2);if(trySsam(it))iAte(null);else iAte(`${nm(it)}: ${msg}`)}
  else if(code===4||code===5){const sn=sauceNote('shabu'),msg=code===4?pickT('eatShabu',{s:sn}):pickT(it&&it.cat==='meat'?'eatTough':'eatMushy');addHappy(code===4?8:3);iAte(`${it?nm(it):''}: ${msg}`)}
  else if(code===6){addHappy(10);iAte(pickT('jukEat'))}
  else if(code===9&&pd.k==='r')setBubble(myAv,pickT('stirred'),1500);
@@ -1092,7 +1156,8 @@ function handleAck(pd,code){
 
 /* =================== INPUT =================== */
 const keys={};let yaw=0,pitch=.42,dist=7.5;const camT=new THREE.Vector3(0,1.4,8.5);
-const isTouch=matchMedia('(pointer:coarse)').matches;
+const isTouch=matchMedia('(pointer:coarse)').matches;if(isTouch)document.body.classList.add('touch');
+$('#chatToggle').addEventListener('click',()=>{document.body.classList.toggle('chatopen');if(document.body.classList.contains('chatopen'))setTimeout(()=>$('#chatInput').focus(),50)});
 const typing=()=>document.activeElement&&document.activeElement.tagName==='INPUT';
 addEventListener('keydown',e=>{
  if(!started)return;
@@ -1182,6 +1247,8 @@ document.addEventListener('click',e=>{
   else if(d.act==='cjuk')sendReq('j',0,{i:IDX.juk});
   else if(d.act==='cstir'){sendReq('r',0,{});swish();myAv.armUp=1}
   else if(d.act==='power')togglePower();
+  else if(d.act==='ssamoff'){ssamMode=null;renderCook()}
+  else if(d.act==='mincook'){cookMin=!cookMin;renderCook()}
   else if(d.act==='stir')stirJuk();
   else if(d.act==='eatjuk')eatJuk();
   else if(d.act==='stand')standUp();
@@ -1288,7 +1355,7 @@ async function firebaseRoom(cfg){
 room=r;room.onPeers(ch=>applyPeers(ch.peers),()=>{room=null;updateOnline()});room.onConnection(()=>updateOnline());updateOnline();sendPresence(true)}catch(e){room=null}})();
 
 /* =================== LOOP =================== */
-let ownT=1,last=performance.now(),stepT=0,warnLow=false,warnDry=false;const tmpV=new THREE.Vector3(),headV=new THREE.Vector3(),fwdV=new THREE.Vector3();
+let camKey='',ownT=1,last=performance.now(),stepT=0,warnLow=false,warnDry=false;const tmpV=new THREE.Vector3(),headV=new THREE.Vector3(),fwdV=new THREE.Vector3();
 function loop(){
  const now=performance.now(),dt=Math.min(.05,(now-last)/1000);last=now;
  if(started&&myAv){
@@ -1338,6 +1405,10 @@ function loop(){
  if(mode==='cook'&&ct){const sp=seatPos(ct,me.seat.idx);tmpV.set(ct.x+sp.ox*.95,1.95,ct.z+sp.oz*.95);camera.position.lerp(tmpV,.12);camT.lerp(new THREE.Vector3(ct.x-sp.ox*.02,.93,ct.z-sp.oz*.02),.12)}
  else{const target=new THREE.Vector3(me.x,me.y+1.5,me.z);camT.lerp(target,.2);tmpV.set(camT.x+Math.sin(yaw)*Math.cos(pitch)*dist,camT.y+Math.sin(pitch)*dist,camT.z+Math.cos(yaw)*Math.cos(pitch)*dist);tmpV.y=Math.max(.4,tmpV.y);camera.position.lerp(tmpV,.25)}
  camera.lookAt(camT);
+ // phones: keep the table centred in the area above the cook sheet
+ document.body.classList.toggle('cooking',mode==='cook');document.body.classList.toggle('cookmin',cookMin);
+ {const ce=$('#cook'),ph=(mode==='cook'&&innerWidth<=820&&ce&&!ce.classList.contains('hidden'))?ce.offsetHeight+8:0,key=innerWidth+'x'+innerHeight+'/'+ph;
+  if(key!==camKey){camKey=key;if(ph){camera.aspect=innerWidth/(innerHeight+ph);camera.setViewOffset(innerWidth,innerHeight+ph,0,ph,innerWidth,innerHeight)}else{camera.clearViewOffset();camera.aspect=innerWidth/innerHeight}camera.updateProjectionMatrix()}}
  if(started){updatePrompt();sendPresence(false);
   ownT-=dt;if(ownT<=0){ownT=1;
    // the table I sit at lost its owner → I take it over
