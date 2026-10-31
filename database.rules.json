@@ -1,0 +1,19 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "hr": {
+      "rooms": {
+        "$room": {
+          "p": {
+            ".read": true,
+            "$pid": {
+              ".write": true,
+              ".validate": "newData.val() == null || (newData.child('n').isString() && newData.child('n').val().length <= 12 && (!newData.child('say').exists() || newData.child('say').val().length <= 80))"
+            }
+          }
+        }
+      }
+    }
+  }
+}
