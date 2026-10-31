@@ -8,7 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="🏮 Healing Restaurant · Grill & Shabu">
 <meta property="og:description" content="지글지글 보글보글, 누구나 들어와 함께 굽고 끓여 먹는 3D 온라인 힐링 식당 🥩🍲">
-<meta property="og:image" content="/og.jpg">
+<meta property="og:image" content="https://healing-restaurant.vercel.app/og.jpg">
+<meta property="og:url" content="https://healing-restaurant.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#5a3522">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏮</text></svg>">
@@ -1268,7 +1269,11 @@ async function firebaseRoom(cfg){
  }
  db.ref('.info/connected').on('value',s=>{connected=!!s.val();if(connected){meRef.onDisconnect().remove();sentStr={};sentTbKey='';flush(true)}connHs.forEach(h=>{try{h(connected)}catch(e){}})});
  setInterval(()=>flush(false),300);
- addEventListener('pagehide',()=>{try{meRef.remove()}catch(e){}});
+ // safety: re-send my full state regularly and whenever the page comes back (mobile app switching)
+ const resync=()=>{if(!connected)return;sentStr={};sentTbKey='';flush(true)};
+ setInterval(resync,8000);
+ addEventListener('pageshow',resync);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')resync()});
+ addEventListener('pagehide',e=>{if(!e.persisted){try{meRef.remove()}catch(err){}}});
  return{label:t('branch',{n:roomNo}),roomNo,
   presence(patch){mine=Object.assign({},mine);for(const k in patch){if(patch[k]===null)delete mine[k];else mine[k]=patch[k]}cache=null;flush(false);return Promise.resolve()},
   onPeers(h){peerHs.push(h);setTimeout(()=>h({peers:peersArr(),joined:[],left:[],updated:[]}),0);return()=>{}},
